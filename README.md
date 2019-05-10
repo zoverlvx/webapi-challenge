@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+A: Express is very bare-bones. If you want it to parse json, you have to tell it to do so. Express is also very middleware-friendly.
+
 - [ ] Describe Middleware?
+
+A: Middleware is like a bridge between two applications.
 
 - [ ] Describe a Resource?
 
+A: Memory would be a resource.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+A: Typically a 200 status and the post or update that was created.
+
 - [ ] How can we partition our application into sub-applications?
+
+A: We can tell Express what paths to use in the server, then define the routes of that path with express.Router() in a different file.
 
 ## Project Setup
 
