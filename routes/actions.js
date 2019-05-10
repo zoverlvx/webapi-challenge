@@ -16,9 +16,10 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
 	const {project_id, description, notes, completed} = req.body;
 	const projects = await projectDb.get()
-	console.log(projects)
+	const ids = projects.map(project => project.id)
+	console.log(ids);
 	try {
-		if (projects.includes({id: project_id})) {
+		if (ids.includes(project_id)) {
 			const action = db.insert({
 				project_id, 
 				description, 
@@ -27,7 +28,7 @@ router.post("/", async (req, res) => {
 			});
 			res.status(201).json(action);
 		}
-		if (!projects.includes({id: project_id})) {
+		if (!ids.includes(project_id)) {
 			res.status(404).json({
 				message: "Cannot add action to project that doesn't exist"
 			})
