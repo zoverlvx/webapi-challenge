@@ -13,10 +13,7 @@ I need this code, just don't know where, perhaps should make some middleware, do
 Go code!
 */
 
-const express = require("express");
-const helmet = require("helmet");
-
-const server = express();
+const server = require("./server.js");
 
 server.listen(process.env.PORT, () => {
 	console.log(`Server Running on ${process.env.PORT}`);
