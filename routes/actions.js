@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("../data/helpers/actionModel");
+const projectDb = require("../data/helpers/projectModel");
 
 const router = express.Router();
 
@@ -14,14 +15,23 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
 	const {project_id, description, notes, completed} = req.body;
+	const projects = await projectDb.get()
+	console.log(projects)
 	try {
-		const action = db.insert({
-			project_id, 
-			description, 
-			notes, 
-			completed
-		});
-		res.status(201).json(action);
+		if (projects.includes({id: project_id})) {
+			const action = db.insert({
+				project_id, 
+				description, 
+				notes, 
+				completed
+			});
+			res.status(201).json(action);
+		}
+		if (!projects.includes({id: project_id})) {
+			res.status(404).json({
+				message: "Cannot add action to project that doesn't exist"
+			})
+		}
 	} catch (error) {
 		res.status(500).json({
 			error: "Error adding action"
